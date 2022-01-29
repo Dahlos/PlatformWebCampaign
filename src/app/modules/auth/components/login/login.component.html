@@ -1,29 +1,29 @@
 <div class="container container-form">
-    <div class="center">
-        <div>
+    <div class="center"> 
+        <div> 
             <mat-card>
-                <mat-card-header>
+                <mat-card-header> 
                     <mat-card-title>
                         <div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">    
-                            <h1>Sign In</h1>
+                            <h1>Sign In</h1> 
                         </div>
                     </mat-card-title>   
-                </mat-card-header>   
+                </mat-card-header>     
                 <mat-card-content>   
                     <form [formGroup]="loginForm" (ngSubmit)="login()" id="loginForm">    
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
                                 <mat-form-field appearance="outline">  
                                     <mat-label>Email</mat-label>
-                                    <input matInput placeholder="Email" formControlName="email" type="email"> 
+                                    <input matInput placeholder="Email" formControlName="email" type="email">  
                                     <mat-error *ngIf="loginForm.hasError('email', 'email')">
                                         Please enter a valid email address 
                                     </mat-error>  
                                     <mat-error *ngIf="loginForm.hasError('required', 'email')">
-                                        Email is <strong>required</strong>
+                                        Email is <strong>required</strong> 
                                     </mat-error> 
                                 </mat-form-field>
-                            </div>
+                            </div> 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <mat-form-field appearance="outline">
                                     <mat-label>Password</mat-label>
@@ -38,10 +38,10 @@
                                     [disabled]="!loginForm.valid">Login</button>
                             </div>
                         </div>
-                    </form>
-                </mat-card-content>
+                    </form> 
+                </mat-card-content> 
             </mat-card>
-        </div>
+        </div> 
     </div>
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar> 
 </div>
