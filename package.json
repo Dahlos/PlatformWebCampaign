@@ -11,7 +11,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged",
+      "pre-commit": "pretty-quick --staged && ng test --watch=false --browsers=ChromeHeadless",
       "pre-push": "npm test"
     }
   },
