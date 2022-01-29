@@ -1,0 +1,54 @@
+.toolbar-icon {
+    padding: 0 14px;
+}
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.card-filters {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.td-code {
+    width: 15%;
+}
+.th-code {
+    width: 15%;
+}
+
+.td-name {
+    width: 55%;
+}
+.th-name {
+    width: 55%;
+}
+
+.td-date {
+    width: 10%;
+}
+.th-date {
+    width: 10%;
+}
+
+.td-actions {
+    width: 10%;
+}
+.th-actions {
+    width: 10%;
+}
+
+.contain-btnnew {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
