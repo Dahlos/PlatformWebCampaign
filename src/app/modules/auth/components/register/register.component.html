@@ -1,0 +1,60 @@
+<div class="container container-form">
+    <div class="center">
+        <div>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h1>Sign Up</h1>
+                        </div>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="registerForm" (ngSubmit)="signUp()" id="registerForm">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Email" formControlName="email" type="email" />
+                                    <mat-error *ngIf="registerForm.hasError('email', 'username')">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                    <mat-error *ngIf="registerForm.hasError('required', 'username')">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Password</mat-label>
+                                    <input matInput placeholder="Password" formControlName="password" type="password" />
+                                    <mat-error *ngIf="registerForm.hasError('required', 'password')">
+                                        Password is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                                <div *ngIf="errorsPassword.length > 0">
+                                    <mat-error>
+                                        <ul>
+                                            <li *ngFor="let error of errorsPassword">{{ error.description }}</li>
+                                        </ul>
+                                    </mat-error>
+                                </div>
+                            </div>
+                            <div class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <button
+                                    mat-raised-button
+                                    color="primary"
+                                    type="submit"
+                                    [disabled]="!registerForm.valid"
+                                >
+                                    Sign Up
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+</div>

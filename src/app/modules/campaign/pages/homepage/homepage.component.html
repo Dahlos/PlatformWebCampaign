@@ -1,0 +1,74 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Campaigns Platform</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-button [matMenuTriggerFor]="beforeMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="signOut()">Sign Out</button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+    <div class="text-center row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <mat-card class="card-filters">
+                <mat-form-field appearance="outline">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Campaign Name" #input>
+                </mat-form-field>
+            </mat-card>
+        </div>
+    </div>
+    <div class="contain-btnnew">
+        <button mat-raised-button (click)="onCreateClick()" color="accent">Create New</button>
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="code">
+                <th class="th-code" mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+                <td class="td-code" mat-cell *matCellDef="let row"> {{row.code}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th class="th-name" mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td class="td-name" mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="startDate">
+                <th class="th-date" mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+                <td class="td-date" mat-cell *matCellDef="let row"> {{row.startDate | date :'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="endDate">
+                <th class="th-date" mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+                <td class="td-date" mat-cell *matCellDef="let row"> {{row.endDate | date :'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th class="th-actions" mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                <td class="td-actions" mat-cell *matCellDef="let row">
+                    <div>
+                        <button color="primary" (click)="onEditClick(row)" mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button color="warn" (click)="onDeleteClick(row)" mat-icon-button>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[8, 20, 60, 100]" aria-label="Select page of campaigns"></mat-paginator>
+    </div>
+</div>
