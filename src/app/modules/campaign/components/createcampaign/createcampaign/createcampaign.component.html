@@ -1,6 +1,8 @@
 <div>
     <div>
-        <h2><strong>{{isEdit?'Edit Campaign':'Create New Campaign'}} </strong></h2>
+        <h2>
+            <strong>{{ isEdit ? 'Edit Campaign' : 'Create New Campaign' }} </strong>
+        </h2>
     </div>
     <mat-divider></mat-divider>
     <form class="form-campaign" [formGroup]="campaignForm" (ngSubmit)="submitForm()">
@@ -8,11 +10,16 @@
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Start Date</mat-label>
-                    <input formControlName="startDate" matInput [matDatepicker]="picker">
+                    <input formControlName="startDate" matInput [matDatepicker]="picker" />
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <button *ngIf="campaignForm.get('startDate')?.value != null" matSuffix mat-icon-button
-                        aria-label="Clear" (click)="campaignForm.patchValue({'startDate':null})">
+                    <button
+                        *ngIf="campaignForm.get('startDate')?.value != null"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="campaignForm.patchValue({ startDate: null })"
+                    >
                         <mat-icon>close</mat-icon>
                     </button>
                     <mat-error *ngIf="campaignForm.hasError('required', 'startDate')">
@@ -23,11 +30,16 @@
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>End Date</mat-label>
-                    <input formControlName="endDate" matInput [matDatepicker]="pickerEnd">
+                    <input formControlName="endDate" matInput [matDatepicker]="pickerEnd" />
                     <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
                     <mat-datepicker #pickerEnd></mat-datepicker>
-                    <button *ngIf="campaignForm.get('endDate')?.value != null" matSuffix mat-icon-button
-                        aria-label="Clear" (click)="campaignForm.patchValue({'endDate':null})">
+                    <button
+                        *ngIf="campaignForm.get('endDate')?.value != null"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="campaignForm.patchValue({ endDate: null })"
+                    >
                         <mat-icon>close</mat-icon>
                     </button>
                     <mat-error *ngIf="campaignForm.hasError('required', 'endDate')">
@@ -40,9 +52,14 @@
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Code</mat-label>
-                    <input formControlName="code" matInput>
-                    <button *ngIf="campaignForm.get('code')?.value != null" matSuffix mat-icon-button aria-label="Clear"
-                        (click)="campaignForm.patchValue({'code':null})">
+                    <input formControlName="code" matInput />
+                    <button
+                        *ngIf="campaignForm.get('code')?.value != null"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="campaignForm.patchValue({ code: null })"
+                    >
                         <mat-icon>close</mat-icon>
                     </button>
                     <mat-error *ngIf="campaignForm.hasError('required', 'code')">
@@ -53,9 +70,14 @@
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <mat-form-field class="form-field" appearance="outline">
                     <mat-label>Name</mat-label>
-                    <input formControlName="name" matInput>
-                    <button *ngIf="campaignForm.get('name')?.value != null" matSuffix mat-icon-button aria-label="Clear"
-                        (click)="campaignForm.patchValue({'name':null})">
+                    <input formControlName="name" matInput />
+                    <button
+                        *ngIf="campaignForm.get('name')?.value != null"
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="campaignForm.patchValue({ name: null })"
+                    >
                         <mat-icon>close</mat-icon>
                     </button>
                     <mat-error *ngIf="campaignForm.hasError('required', 'name')">
@@ -65,7 +87,9 @@
             </div>
         </div>
         <div>
-            <button mat-raised-button [disabled]="campaignForm.invalid" color="accent"> {{isEdit?'Save Changes':'Save'}}</button>
+            <button mat-raised-button [disabled]="campaignForm.invalid" color="accent">
+                {{ isEdit ? 'Save Changes' : 'Save' }}
+            </button>
         </div>
     </form>
 </div>

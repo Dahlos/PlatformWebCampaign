@@ -6,60 +6,66 @@ import { ResponseAutentication } from '../../interfaces/responseautentication.in
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
-  isLoading: boolean = false;
-  constructor(public formBuilder: FormBuilder, public auth: AuthService, private _snackBar: MatSnackBar,
-    public router: Router) {
-    this.registerForm = this.buildForm();
-  }
+    registerForm: FormGroup;
+    isLoading: boolean = false;
+    errorsPassword: any[] = [];
+    constructor(
+        public formBuilder: FormBuilder,
+        public auth: AuthService,
+        private _snackBar: MatSnackBar,
+        public router: Router
+    ) {
+        this.registerForm = this.buildForm();
+    }
 
-  buildForm(): FormGroup {
-    return this.formBuilder.group({
-      email: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.email,
-        ])
-      ),
-      password: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(15),
-        ])
-      ),
-    });
-  }
+    buildForm(): FormGroup {
+        return this.formBuilder.group({
+            email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+            password: new FormControl(
+                '',
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(6),
+                    // Validators.maxLength(15),
+                ])
+            ),
+        });
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {}
 
-  signUp() {
-    this.registerForm.disable();
-    this.isLoading = true;
-    this.auth.register(this.registerForm.getRawValue().email, this.registerForm.getRawValue().password)
-      .then((res: ResponseAutentication) => {
-        const { token } = res;
-        this.isLoading = false;
-        this.auth.setStatusLogin(true);
-        this.auth.setToken(token);
-        this.router.navigate(['/campaign']);
-      })
-      .catch((err) => {
-        this.isLoading = false;
-        this.openSnackBar(err.error?.message || err.error, 'Cerrar');
-      });
-  }
+    signUp() {
+        this.registerForm.disable();
+        this.isLoading = true;
+        this.auth
+            .register(this.registerForm.getRawValue().email, this.registerForm.getRawValue().password)
+            .then((res: ResponseAutentication) => {
+                const { token } = res;
+                this.isLoading = false;
+                this.auth.setStatusLogin(true);
+                this.auth.setToken(token);
+                this.router.navigate(['/campaign']);
+            })
+            .catch((err) => {
+                this.isLoading = false;
+                this.registerForm.enable();
+                console.log(err);
+                if (err.error instanceof Array) {
+                    this.errorsPassword = err.error;
+                    console.log(this.errorsPassword);
+                    return;
+                }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
-  }
+                this.openSnackBar(err.error?.message || err.error, 'Cerrar');
+            });
+    }
 
+    openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action);
+    }
 }
